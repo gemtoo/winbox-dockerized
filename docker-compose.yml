@@ -1,0 +1,18 @@
+services:
+  winbox:
+    container_name: winbox
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    volumes:
+      - type: bind
+        source: ${HOME}/.Xauthority
+        target: ${HOME}/.Xauthority
+      - type: bind
+        source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+      - /dev/shm:/dev/shm
+      - ./winedata:/home/user/.wine
+    environment:
+      - DISPLAY=${DISPLAY}
